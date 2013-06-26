@@ -1,5 +1,5 @@
 [user]
-	name = mathieul
+	name = Mathieu Lajugie
 	email = mathieul@gmail.com
 [alias]
 	co = checkout
@@ -44,3 +44,5 @@
 	tool = Kaleidoscope
 [mergetool]
 	keepBackup = true
+[push]
+	default = simple
