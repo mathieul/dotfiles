@@ -94,7 +94,8 @@ export TASKING_DB_PASSWORD="changeme"
 # Go
 #
 # export GOROOT=/usr/local/Cellar/go/1.0.3
-# export GOPATH=/Users/mathieu/Documents/Development/Perso/Go
+export GOPATH=/Users/mathieu/Documents/Development/Vendor/golang
+export PATH=$GOPATH/bin:$PATH
 
 #
 # Erlang / Elixir
@@ -147,6 +148,11 @@ export PATH=./bin:$HOME/bin:/usr/local/bin:/usr/local/share/npm/bin:$PATH
 # Java
 #
 # export JAVA_HOME=$(/usr/libexec/java_home)
+
+#
+# Docker
+#
+eval "$(docker-machine env default)"
 
 #
 # Load EC2 environment
