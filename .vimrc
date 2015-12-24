@@ -20,6 +20,7 @@ set scrolloff=2                   " minimum lines above/below cursor
 set laststatus=2                  " always show status bar
 set list listchars=tab:»·,trail:· " show extra space characters
 " set nofoldenable                  " disable code folding
+set foldmethod=manual
 " set clipboard=unnamed             " use the system clipboard
 runtime macros/matchit.vim        " use % to jump between start/end of methods
 
@@ -56,7 +57,15 @@ map <leader>l :!clear && git log -p %<cr>
 map <leader>d :!clear && git diff %<cr>
 
 " map Silver Searcher
-map <leader>a :Ag!<space>
+map <leader>f :Ag!<space>
+
+" tabularize
+nmap <Leader>a= :Tabularize /=<CR>
+vmap <Leader>a= :Tabularize /=<CR>
+nmap <Leader>a: :Tabularize /:\zs<CR>
+vmap <Leader>a: :Tabularize /:\zs<CR>
+nmap <Leader>a, :Tabularize /,\zs<CR>
+vmap <Leader>a, :Tabularize /,\zs<CR>
 
 " clear the command line and search highlighting
 noremap <C-n> :nohlsearch<CR>
@@ -72,7 +81,8 @@ set splitbelow
 " NERDTree
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 nmap <leader>n :NERDTreeToggle<cr>
 
 " vim-rspec
@@ -90,3 +100,36 @@ filetype plugin indent on
 set tabstop=2
 set shiftwidth=2
 set expandtab
+
+" coffee-script plugin
+let coffee_indent_keep_current = 1
+
+" mustache / handlebars
+let g:mustache_abbreviations = 1
+
+"VIM Airline
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
+if !exists('g:airline_symbols')
+let g:airline_symbols = {}
+endif
+" unicode symbols
+let g:airline_left_sep = '»'
+let g:airline_left_sep = '▶'
+let g:airline_right_sep = '«'
+let g:airline_right_sep = '◀'
+let g:airline_symbols.linenr = '␊'
+let g:airline_symbols.linenr = '␤'
+let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.paste = 'Þ'
+let g:airline_symbols.paste = '∥'
+let g:airline_symbols.whitespace = 'Ξ'
+
+set guifont=Inconsolata:h14.00 "best font ever
+"ignored directories which command-t will use too. Make sure _build is in here
+set wildignore=*.o,*.obj,.git,node_modules/**,bower_components/**,**/node_modules/**,_build/**,deps/**
+
+"run tests right from vim - super helpful
+map <leader><space> :!mix test<CR>
